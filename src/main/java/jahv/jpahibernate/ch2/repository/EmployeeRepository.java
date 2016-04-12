@@ -1,4 +1,4 @@
-package jahv.jpahibernate.ch2.service;
+package jahv.jpahibernate.ch2.repository;
 
 import jahv.jpahibernate.ch2.entity.Employee;
 
@@ -14,7 +14,7 @@ import javax.persistence.TypedQuery;
  * @since April 4th, 2016
  *
  */
-public class EmployeeService {
+public class EmployeeRepository {
 
 	private EntityManager entityManager;
 
@@ -23,7 +23,7 @@ public class EmployeeService {
 	 * 
 	 * @param entityManager
 	 */
-	public EmployeeService(final EntityManager entityManager) {
+	public EmployeeRepository(final EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
 
@@ -35,11 +35,10 @@ public class EmployeeService {
 	 * @param salary
 	 * @return Employee
 	 */
-	public Employee saveEmployee(final int id, final String name, final long salary) {
-		final Employee employee = new Employee(id);
-		employee.setName(name);
-		employee.setSalary(salary);
+	public Employee saveEmployee(final Employee employee) {
+		entityManager.getTransaction().begin();
 		entityManager.persist(employee);
+		entityManager.getTransaction().commit();
 		return employee;
 	}
 
@@ -70,7 +69,9 @@ public class EmployeeService {
 	public void deleteEmployee(final int id) {
 		final Employee employee = findEmployee(id);
 		if (employee != null) {
+			entityManager.getTransaction().begin();
 			entityManager.remove(employee);
+			entityManager.getTransaction().commit();
 		}
 	}
 
@@ -84,7 +85,9 @@ public class EmployeeService {
 	public Employee raiseSalary(final int id, final long raise) {
 		final Employee employee = findEmployee(id);
 		if (employee != null) {
+			entityManager.getTransaction().begin();
 			employee.setSalary(employee.getSalary() + raise);
+			entityManager.getTransaction().commit();
 		}
 		return employee;
 	}
