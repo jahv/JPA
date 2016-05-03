@@ -148,6 +148,18 @@ public class Chapter4_IT {
 	}
 
 	/**
+	 * Test saving an employee with its corresponding department and parking lot
+	 */
+	@Test
+	public void testFindParkingSpace() {
+
+		final ParkingLotEntity parkingLot = parkingRepo.find(ParkingLotEntity.class, 1);
+
+		Assertions.assertThat(parkingLot).isNotNull();
+		Assertions.assertThat(parkingLot.getEmployee()).isNotNull();
+	}
+
+	/**
 	 * MEthod to create a employeeV2 object
 	 * @param name
 	 * @return

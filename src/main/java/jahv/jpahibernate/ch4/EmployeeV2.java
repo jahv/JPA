@@ -99,7 +99,8 @@ public class EmployeeV2 {
 	private Employee serializableEmployeeData;
 
 	/**
-	 * Join column is needed when the fk column names different to department_id
+	 * Join column is needed when the fk column names different to department_id.
+	 * The value is the actual column name in DB
 	 */
 	@ManyToOne
 	@JoinColumn(name = "depto_id")
