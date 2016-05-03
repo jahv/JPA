@@ -305,4 +305,15 @@ public class EmployeeV2 {
 		this.parkingSpace = parkingSpace;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "EmployeeV2 [id=" + id + ", name=" + name + ", department=" + department + ", parkingSpace="
+				+ parkingSpace + "]";
+	}
+
 }

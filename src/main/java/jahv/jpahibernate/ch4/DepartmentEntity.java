@@ -1,10 +1,14 @@
 package jahv.jpahibernate.ch4;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.google.common.base.Objects;
@@ -20,6 +24,9 @@ public class DepartmentEntity {
 
 	@Column(name = "name", columnDefinition = "VARCHAR", length = 50)
 	private String name;
+
+	@OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
+	private List<EmployeeV2> employees;
 
 	/**
 	 * @return the id
@@ -47,6 +54,20 @@ public class DepartmentEntity {
 	 */
 	public void setName(final String name) {
 		this.name = name;
+	}
+
+	/**
+	 * @return the employees
+	 */
+	public List<EmployeeV2> getEmployees() {
+		return employees;
+	}
+
+	/**
+	 * @param employees the employees to set
+	 */
+	public void setEmployees(List<EmployeeV2> employees) {
+		this.employees = employees;
 	}
 
 	/*
