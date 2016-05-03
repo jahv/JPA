@@ -1,10 +1,8 @@
-package jahv.jpahibernate.ch2.controller;
+package jahv.jpahibernate.ch2;
 
-import jahv.jpahibernate.ch2.entity.Employee;
-import jahv.jpahibernate.ch2.repository.EmployeeRepository;
+import jahv.jpahibernate.utils.Utils;
 
 import java.text.ParseException;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -19,32 +17,18 @@ import javax.persistence.Persistence;
 public class EmployeeController {
 
 	/**
-	 * Method to generate dynamic ids based on current time
-	 * @return generated id
-	 * @throws ParseException
-	 */
-	private static int generateIdBasedOnTime() {
-		final Calendar calendar = Calendar.getInstance();
-		final int hours = calendar.get(Calendar.HOUR_OF_DAY);
-		final int minutes = calendar.get(Calendar.MINUTE);
-		final int seconds = calendar.get(Calendar.SECOND);
-		final int milliSeconds = calendar.get(Calendar.MILLISECOND);
-		final String id = "" + hours + minutes + seconds + milliSeconds;
-		return new Integer(id);
-	}
-
-	/**
 	 * Main method
 	 * 
 	 * @param args
 	 * @throws ParseException
 	 */
 	public static void main(String[] args) {
+		System.out.println("Running: " + EmployeeController.class);
 		final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("EmployeeServiceUnit");
 		final EntityManager entityManager = entityManagerFactory.createEntityManager();
 		final EmployeeRepository employeeRepository = new EmployeeRepository(entityManager);
 
-		final int id = generateIdBasedOnTime();
+		final int id = Utils.generateIdBasedOnTime();
 
 		// Create and saves employee
 		final Employee employeeToSave = new Employee(id);

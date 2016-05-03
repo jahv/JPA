@@ -1,6 +1,4 @@
-package jahv.jpahibernate.ch2.repository;
-
-import jahv.jpahibernate.ch2.entity.Employee;
+package jahv.jpahibernate.ch2;
 
 import java.util.List;
 
@@ -28,12 +26,10 @@ public class EmployeeRepository {
 	}
 
 	/**
-	 * Instantiate and save employee to DB
+	 * Instantiate and save {@link Employee} employee to DB
 	 * 
-	 * @param id
-	 * @param name
-	 * @param salary
-	 * @return Employee
+	 * @param employee
+	 * @return {@link Employee}
 	 */
 	public Employee saveEmployee(final Employee employee) {
 		entityManager.getTransaction().begin();
@@ -43,17 +39,17 @@ public class EmployeeRepository {
 	}
 
 	/**
-	 * Find employee based on id
+	 * Find {@link Employee} based on id
 	 * 
 	 * @param id
-	 * @return Employee
+	 * @return {@link Employee}
 	 */
 	public Employee findEmployee(final int id) {
 		return entityManager.find(Employee.class, id);
 	}
 
 	/**
-	 * Retrieves list of all employees
+	 * Retrieves list of all {@link Employee} employees
 	 * @return List<Employee>
 	 */
 	public List<Employee> findAllEmployees() {
@@ -62,7 +58,7 @@ public class EmployeeRepository {
 	}
 
 	/**
-	 * Delete employee from DB based on id
+	 * Delete {@link Employee} employee from DB based on id
 	 * 
 	 * @param id
 	 */
@@ -76,7 +72,7 @@ public class EmployeeRepository {
 	}
 
 	/**
-	 * Raise employee salary based on id
+	 * Raise {@link Employee} employee salary based on id
 	 * 
 	 * @param id
 	 * @param raise

@@ -8,6 +8,7 @@
 	<properties>
 		<java.version>1.7</java.version>
 
+		<assertj.version>1.7.1</assertj.version>
 		<guava.version>19.0</guava.version>
 		<hibernate.version>4.3.11.Final</hibernate.version>
 		<junit.version>4.12</junit.version>
@@ -36,6 +37,13 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>1.7.0</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -93,7 +101,7 @@
 						<configuration>
 							<archive>
 								<manifest>
-									<mainClass>jahv.jpahibernate.ch2.controller.EmployeeTest</mainClass>
+									<mainClass>jahv.jpahibernate.ch2.EmployeeTest</mainClass>
 								</manifest>
 							</archive>
 							<descriptorRefs>

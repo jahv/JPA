@@ -1,8 +1,8 @@
-package jahv.jpahibernate.ch2.repository;
+package jahv.jpahibernate.ch2;
 
-import jahv.jpahibernate.ch2.entity.Employee;
+import jahv.jpahibernate.ch2.Employee;
+import jahv.jpahibernate.ch2.EmployeeRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -104,13 +104,12 @@ public class EmployeeRepositoryIT {
 	 */
 	@Test
 	public void testFindAllEmployees() {
-		final List<Employee> employeesExpected = new ArrayList<Employee>();
-		employeesExpected.add(this.mockEmployee());
+		final Employee employeeExpected = this.mockEmployee();
 
 		final List<Employee> employees = employeeRepository.findAllEmployees();
 		Assert.assertNotNull(employees);
 		Assert.assertFalse(employees.isEmpty());
-		Assert.assertEquals(employeesExpected, employees);
+		Assert.assertTrue(employees.contains(employeeExpected));
 	}
 
 	/**

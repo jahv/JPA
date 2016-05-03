@@ -1,4 +1,6 @@
-package jahv.jpahibernate.ch2.entity;
+package jahv.jpahibernate.ch2;
+
+import java.io.Serializable;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -21,7 +23,12 @@ import com.google.common.base.Objects;
 
 @Entity
 @Access(AccessType.FIELD)
-public class Employee {
+public class Employee implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private static final String LOCAL_AREA_CODE = "222";
 
@@ -52,6 +59,14 @@ public class Employee {
 	 */
 	public Employee(final int id) {
 		this.id = id;
+	}
+
+	/**
+	 * Constructor
+	 * @param name
+	 */
+	public Employee(final String name) {
+		this.name = name;
 	}
 
 	/**
