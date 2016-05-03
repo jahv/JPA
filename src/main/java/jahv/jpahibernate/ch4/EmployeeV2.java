@@ -19,6 +19,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -49,12 +50,12 @@ public class EmployeeV2 {
 	 * GenerationType.SEQUENCE need @SequenceGenerator annotation
 	 */
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	// @GeneratedValue(strategy = GenerationType.AUTO)
 	// @TableGenerator(name = "EmployeeV2_Generator", table = "employeev2_id_generator", pkColumnName =
 	// "generator_name",
 	// pkColumnValue = "EmployeeV2", valueColumnName = "value", initialValue = 1, allocationSize = 1)
 	// @GeneratedValue(generator = "EmployeeV2_Generator", strategy = GenerationType.TABLE)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
 	private int id;
 
@@ -104,6 +105,9 @@ public class EmployeeV2 {
 	@JoinColumn(name = "depto_id")
 	private DepartmentEntity department;
 
+	@OneToOne
+	@JoinColumn(name = "parking_lot")
+	private ParkingLotEntity parkingSpace;
 	/**
 	 * @return the doubleData
 	 */
@@ -284,6 +288,20 @@ public class EmployeeV2 {
 	 */
 	public void setDepartment(final DepartmentEntity department) {
 		this.department = department;
+	}
+
+	/**
+	 * @return the parkingSpace
+	 */
+	public ParkingLotEntity getParkingSpace() {
+		return parkingSpace;
+	}
+
+	/**
+	 * @param parkingSpace the parkingSpace to set
+	 */
+	public void setParkingSpace(ParkingLotEntity parkingSpace) {
+		this.parkingSpace = parkingSpace;
 	}
 
 }

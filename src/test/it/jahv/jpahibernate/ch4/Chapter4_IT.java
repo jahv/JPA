@@ -23,11 +23,15 @@ import org.junit.Test;
  * @author jose.hernandez
  * @since 12 April, 2016
  */
-public class EmployeeRepositoryV2IT {
+public class Chapter4_IT {
 
 	private static EntityManagerFactory entityManagerFactory;
 	private static EntityManager entityManager;
 	private static EmployeeRepositoryV2 employeeRepositoryV2;
+
+	private static GenericRepository<EmployeeV2> employeeRepo;
+	private static GenericRepository<DepartmentEntity> deparmentRepo;
+	private static GenericRepository<ParkingLotEntity> parkingRepo;
 
 	/**
 	 * Initialize {@link EntityManagerFactory}, {@link EntityManager} and {@link EmployeeRepositoryV2}
@@ -41,6 +45,10 @@ public class EmployeeRepositoryV2IT {
 		entityManagerFactory = Persistence.createEntityManagerFactory("EmployeeServiceUnit");
 		entityManager = entityManagerFactory.createEntityManager();
 		employeeRepositoryV2 = new EmployeeRepositoryV2(entityManager);
+
+		employeeRepo = new GenericRepository<EmployeeV2>(entityManager);
+		deparmentRepo = new GenericRepository<DepartmentEntity>(entityManager);
+		parkingRepo = new GenericRepository<ParkingLotEntity>(entityManager);
 	}
 
 	/**
@@ -108,6 +116,35 @@ public class EmployeeRepositoryV2IT {
 		Assertions.assertThat(employeeV2_Dev).isNotNull();
 		Assertions.assertThat(employeeV2_Dev.getDepartment()).isNotNull();
 		Assertions.assertThat(employeeV2_Dev.getDepartment().getName()).isEqualTo("Development");
+	}
+
+	/**
+	 * Test saving an employee with its corresponding department and parking lot
+	 */
+	@Test
+	public void testSavingEmployeeAndItsRelations() {
+		final DepartmentEntity department = new DepartmentEntity();
+		department.setName("Development - Eugenia");
+		deparmentRepo.save(department);
+
+		final ParkingLotEntity parkingLot = new ParkingLotEntity();
+		parkingLot.setLocation("Tower 3");
+		parkingLot.setLot(789);
+		parkingRepo.save(parkingLot);
+
+		final EmployeeV2 employee = new EmployeeV2();
+		employee.setName("Jose Antonio");
+		employee.setDepartment(department);
+		employee.setParkingSpace(parkingLot);
+		
+		final EmployeeV2 employeeSaved = employeeRepo.save(employee);
+
+		final EmployeeV2 employeeFound = employeeRepo.find(EmployeeV2.class, employeeSaved.getId());
+
+		Assertions.assertThat(employeeFound).isNotNull();
+		Assertions.assertThat(employeeFound.getDepartment()).isNotNull();
+		Assertions.assertThat(employeeFound.getParkingSpace()).isNotNull();
+
 	}
 
 	/**

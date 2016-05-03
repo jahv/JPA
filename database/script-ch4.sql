@@ -54,3 +54,16 @@ ALTER TABLE `employee_ch4`
 	ADD COLUMN `depto_id` INT NULL AFTER `serializable_data`,
 	ADD CONSTRAINT `FK1_department` FOREIGN KEY (`depto_id`) REFERENCES `department` (`id`) ON UPDATE CASCADE ON DELETE CASCADE;
 	
+
+CREATE TABLE `Parking_space` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`lot` INT NOT NULL,
+	`location` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_bin'
+ENGINE=InnoDB
+;
+	
+ALTER TABLE `employee_ch4`
+	ADD COLUMN `parking_lot` INT(11) NULL DEFAULT NULL AFTER `depto_id`;
