@@ -97,6 +97,19 @@ public class EmployeeRepositoryV2IT {
 		Assertions.assertThat(employeeV2Found).isNotNull();
 	}
 
+	@Test
+	public void findEmployee() {
+		final EmployeeV2 employeeV2_RH = employeeRepositoryV2.findEmployee(1);
+		Assertions.assertThat(employeeV2_RH).isNotNull();
+		Assertions.assertThat(employeeV2_RH.getDepartment()).isNotNull();
+		Assertions.assertThat(employeeV2_RH.getDepartment().getName()).isEqualTo("RH");
+
+		final EmployeeV2 employeeV2_Dev = employeeRepositoryV2.findEmployee(2);
+		Assertions.assertThat(employeeV2_Dev).isNotNull();
+		Assertions.assertThat(employeeV2_Dev.getDepartment()).isNotNull();
+		Assertions.assertThat(employeeV2_Dev.getDepartment().getName()).isEqualTo("Development");
+	}
+
 	/**
 	 * MEthod to create a employeeV2 object
 	 * @param name

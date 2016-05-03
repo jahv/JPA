@@ -16,7 +16,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -94,6 +96,13 @@ public class EmployeeV2 {
 	@Basic(fetch = FetchType.LAZY)
 	@Lob
 	private Employee serializableEmployeeData;
+
+	/**
+	 * Join column is needed when the fk column names different to department_id
+	 */
+	@ManyToOne
+	@JoinColumn(name = "depto_id")
+	private DepartmentEntity department;
 
 	/**
 	 * @return the doubleData
@@ -261,6 +270,20 @@ public class EmployeeV2 {
 	 */
 	public void setTime_data(Date time_data) {
 		this.time_data = time_data;
+	}
+
+	/**
+	 * @return the department
+	 */
+	public DepartmentEntity getDepartment() {
+		return department;
+	}
+
+	/**
+	 * @param department the department to set
+	 */
+	public void setDepartment(final DepartmentEntity department) {
+		this.department = department;
 	}
 
 }

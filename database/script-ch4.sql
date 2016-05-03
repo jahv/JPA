@@ -34,3 +34,23 @@ ENGINE=InnoDB
 ;	
 
 INSERT INTO `jpahibernate`.`employeev2_id_generator` (`generator_name`, `value`) VALUES ('EmployeeV2', 1);
+
+--#############################
+--# Relations
+--#############################
+CREATE TABLE `department` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_bin'
+ENGINE=InnoDB
+;
+
+INSERT INTO `jpahibernate`.`department` (`name`) VALUES ('RH');
+INSERT INTO `jpahibernate`.`department` (`name`) VALUES ('Development');
+
+ALTER TABLE `employee_ch4`
+	ADD COLUMN `depto_id` INT NULL AFTER `serializable_data`,
+	ADD CONSTRAINT `FK1_department` FOREIGN KEY (`depto_id`) REFERENCES `department` (`id`) ON UPDATE CASCADE ON DELETE CASCADE;
+	

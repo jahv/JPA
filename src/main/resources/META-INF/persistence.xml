@@ -7,12 +7,14 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="EmployeeServiceUnit" transaction-type="RESOURCE_LOCAL">
 		<class>jahv.jpahibernate.ch2.Employee</class>
 		<class>jahv.jpahibernate.ch4.EmployeeV2</class>
+		<class>jahv.jpahibernate.ch4.DepartmentEntity</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpahibernate"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>
 			<property name="javax.persistence.jdbc.password" value=""/>
+			<property name = "hibernate.show_sql" value = "true" />
 		</properties>
 	</persistence-unit>
 
