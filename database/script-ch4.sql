@@ -67,3 +67,27 @@ ENGINE=InnoDB
 	
 ALTER TABLE `employee_ch4`
 	ADD COLUMN `parking_lot` INT(11) NULL DEFAULT NULL AFTER `depto_id`;
+	
+CREATE TABLE `project` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(50) NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_bin'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `employee_project` (
+	`employee_id` INT NOT NULL,
+	`project_id` INT NOT NULL,
+	PRIMARY KEY (`employee_id`, `project_id`)
+)
+COLLATE='utf8_bin'
+ENGINE=InnoDB
+;
+
+ALTER TABLE `employee_project`
+	ADD CONSTRAINT `FK1project` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON UPDATE CASCADE ON DELETE CASCADE;
+	
+ALTER TABLE `employee_project`
+	ADD CONSTRAINT `FK2employee` FOREIGN KEY (`employee_id`) REFERENCES `employee_ch4` (`user_id`) ON UPDATE CASCADE ON DELETE CASCADE;

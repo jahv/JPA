@@ -4,6 +4,7 @@ import jahv.jpahibernate.ch2.Employee;
 import jahv.jpahibernate.utils.EnumValues;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -17,7 +18,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -109,6 +112,11 @@ public class EmployeeV2 {
 	@OneToOne
 	@JoinColumn(name = "parking_lot")
 	private ParkingLotEntity parkingSpace;
+
+	@ManyToMany
+	@JoinTable(name = "employee_project", joinColumns = @JoinColumn(name = "employee_id"),
+			inverseJoinColumns = @JoinColumn(name = "project_id"))
+	private List<Project> projects;
 	/**
 	 * @return the doubleData
 	 */
@@ -119,7 +127,7 @@ public class EmployeeV2 {
 	/**
 	 * @param doubleData the doubleData to set
 	 */
-	public void setDoubleData(Double doubleData) {
+	public void setDoubleData(final Double doubleData) {
 		this.doubleData = doubleData;
 	}
 
@@ -133,7 +141,7 @@ public class EmployeeV2 {
 	/**
 	 * @param booleanData the booleanData to set
 	 */
-	public void setBooleanData(boolean booleanData) {
+	public void setBooleanData(final boolean booleanData) {
 		this.booleanData = booleanData;
 	}
 
@@ -147,7 +155,7 @@ public class EmployeeV2 {
 	/**
 	 * @param arrayData the arrayData to set
 	 */
-	public void setArrayData(String[] arrayData) {
+	public void setArrayData(final String[] arrayData) {
 		this.arrayData = arrayData;
 	}
 
@@ -161,7 +169,7 @@ public class EmployeeV2 {
 	/**
 	 * @param dateTimeData the dateTimeData to set
 	 */
-	public void setDateTimeData(Date dateTimeData) {
+	public void setDateTimeData(final Date dateTimeData) {
 		this.dateTimeData = dateTimeData;
 	}
 
@@ -175,7 +183,7 @@ public class EmployeeV2 {
 	/**
 	 * @param dateData the dateData to set
 	 */
-	public void setDateData(Date dateData) {
+	public void setDateData(final Date dateData) {
 		this.dateData = dateData;
 	}
 
@@ -189,7 +197,7 @@ public class EmployeeV2 {
 	/**
 	 * @param enumData the enumData to set
 	 */
-	public void setEnumData(EnumValues enumData) {
+	public void setEnumData(final EnumValues enumData) {
 		this.enumData = enumData;
 	}
 
@@ -203,7 +211,7 @@ public class EmployeeV2 {
 	/**
 	 * @param serializableEmployeeData the serializableEmployeeData to set
 	 */
-	public void setSerializableEmployeeData(Employee serializableEmployeeData) {
+	public void setSerializableEmployeeData(final Employee serializableEmployeeData) {
 		this.serializableEmployeeData = serializableEmployeeData;
 	}
 
@@ -217,7 +225,7 @@ public class EmployeeV2 {
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(final int id) {
 		this.id = id;
 	}
 
@@ -231,7 +239,7 @@ public class EmployeeV2 {
 	/**
 	 * @param name the name to set
 	 */
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 
@@ -245,7 +253,7 @@ public class EmployeeV2 {
 	/**
 	 * @param array_data_2 the array_data_2 to set
 	 */
-	public void setArray_data_2(byte[] array_data_2) {
+	public void setArray_data_2(final byte[] array_data_2) {
 		this.array_data_2 = array_data_2;
 	}
 
@@ -259,7 +267,7 @@ public class EmployeeV2 {
 	/**
 	 * @param enumData2 the enumData2 to set
 	 */
-	public void setEnumData2(EnumValues enumData2) {
+	public void setEnumData2(final EnumValues enumData2) {
 		this.enumData2 = enumData2;
 	}
 
@@ -273,7 +281,7 @@ public class EmployeeV2 {
 	/**
 	 * @param time_data the time_data to set
 	 */
-	public void setTime_data(Date time_data) {
+	public void setTime_data(final Date time_data) {
 		this.time_data = time_data;
 	}
 
@@ -301,8 +309,22 @@ public class EmployeeV2 {
 	/**
 	 * @param parkingSpace the parkingSpace to set
 	 */
-	public void setParkingSpace(ParkingLotEntity parkingSpace) {
+	public void setParkingSpace(final ParkingLotEntity parkingSpace) {
 		this.parkingSpace = parkingSpace;
+	}
+
+	/**
+	 * @return the projects
+	 */
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	/**
+	 * @param projects the projects to set
+	 */
+	public void setProjects(final List<Project> projects) {
+		this.projects = projects;
 	}
 
 	/*

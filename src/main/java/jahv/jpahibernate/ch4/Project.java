@@ -2,43 +2,43 @@ package jahv.jpahibernate.ch4;
 
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.google.common.base.Objects;
 
 @Entity
-@Table(name = "department")
-public class DepartmentEntity {
+@Table(name = "project")
+public class Project {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", columnDefinition = "INT")
-	private Long id;
+	private int id;
 
-	@Column(name = "name", columnDefinition = "VARCHAR", length = 50)
 	private String name;
 
-	@OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
+	@JoinTable(name = "employee_project", joinColumns = @JoinColumn(name = "project_id"),
+			inverseJoinColumns = @JoinColumn(name = "employee_id"))
+	@ManyToMany
 	private List<EmployeeV2> employees;
 
 	/**
 	 * @return the id
 	 */
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(final Long id) {
+	public void setId(final int id) {
 		this.id = id;
 	}
 
@@ -80,6 +80,7 @@ public class DepartmentEntity {
 		return Objects.hashCode(id, name);
 	}
 
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -87,9 +88,10 @@ public class DepartmentEntity {
 	 */
 	@Override
 	public boolean equals(final Object obj) {
-		if (obj instanceof DepartmentEntity) {
-			final DepartmentEntity that = (DepartmentEntity) obj;
-			return Objects.equal(this.id, that.id) && Objects.equal(this.name, that.name);
+		if (obj instanceof Project) {
+			final Project that = (Project) obj;
+			return Objects.equal(this.id, that.id)
+					&& Objects.equal(this.name, that.name);
 		}
 		return false;
 	}
@@ -101,7 +103,7 @@ public class DepartmentEntity {
 	 */
 	@Override
 	public String toString() {
-		return "DepartmentEntity [id=" + id + ", name=" + name + "]";
+		return "Project [id=" + id + ", name=" + name + "]";
 	}
 
 }

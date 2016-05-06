@@ -32,6 +32,7 @@ public class Chapter4_IT {
 	private static GenericRepository<EmployeeV2> employeeRepo;
 	private static GenericRepository<DepartmentEntity> deparmentRepo;
 	private static GenericRepository<ParkingLotEntity> parkingRepo;
+	private static GenericRepository<Project> projectRepo;
 
 	/**
 	 * Initialize {@link EntityManagerFactory}, {@link EntityManager} and {@link EmployeeRepositoryV2}
@@ -49,6 +50,7 @@ public class Chapter4_IT {
 		employeeRepo = new GenericRepository<EmployeeV2>(entityManager);
 		deparmentRepo = new GenericRepository<DepartmentEntity>(entityManager);
 		parkingRepo = new GenericRepository<ParkingLotEntity>(entityManager);
+		projectRepo = new GenericRepository<Project>(entityManager);
 	}
 
 	/**
@@ -110,12 +112,13 @@ public class Chapter4_IT {
 		final EmployeeV2 employeeV2_RH = employeeRepositoryV2.findEmployee(1);
 		Assertions.assertThat(employeeV2_RH).isNotNull();
 		Assertions.assertThat(employeeV2_RH.getDepartment()).isNotNull();
-		Assertions.assertThat(employeeV2_RH.getDepartment().getName()).isEqualTo("RH");
+		Assertions.assertThat(employeeV2_RH.getDepartment().getName()).isEqualTo("Development - Eugenia");
+		Assertions.assertThat(employeeV2_RH.getProjects()).isNotNull().isNotEmpty();
 
 		final EmployeeV2 employeeV2_Dev = employeeRepositoryV2.findEmployee(2);
 		Assertions.assertThat(employeeV2_Dev).isNotNull();
 		Assertions.assertThat(employeeV2_Dev.getDepartment()).isNotNull();
-		Assertions.assertThat(employeeV2_Dev.getDepartment().getName()).isEqualTo("Development");
+		Assertions.assertThat(employeeV2_Dev.getDepartment().getName()).isEqualTo("Development - Eugenia");
 	}
 
 	/**
@@ -169,6 +172,14 @@ public class Chapter4_IT {
 
 		Assertions.assertThat(department).isNotNull();
 		Assertions.assertThat(department.getEmployees()).isNotNull().isNotEmpty();
+	}
+
+	@Test
+	public void testFindProject() {
+		final Project project = projectRepo.find(Project.class, 2);
+
+		Assertions.assertThat(project).isNotNull();
+		Assertions.assertThat(project.getEmployees()).isNotNull().isNotEmpty();
 	}
 
 	/**

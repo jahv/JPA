@@ -10,6 +10,7 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>jahv.jpahibernate.ch4.EmployeeV2</class>
 		<class>jahv.jpahibernate.ch4.DepartmentEntity</class>
 		<class>jahv.jpahibernate.ch4.ParkingLotEntity</class>
+		<class>jahv.jpahibernate.ch4.Project</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
