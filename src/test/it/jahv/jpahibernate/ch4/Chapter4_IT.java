@@ -100,6 +100,14 @@ public class Chapter4_IT {
 		final String name = "jahv - AUTO - " + id;
 		final EmployeeV2 employeeV2 = mockEmploeeV2(name);
 
+		final Address address = new Address();
+		address.setCity("Coyoacan");
+		address.setState("DF");
+		address.setStreet("Cicalco 23");
+		address.setZipCode("04369");
+
+		employeeV2.setAddress(address);
+
 		final EmployeeV2 savedEmployeeV2 = employeeRepositoryV2.saveEmployee(employeeV2);
 		Assertions.assertThat(savedEmployeeV2.getId()).isNotNull();
 

@@ -91,3 +91,14 @@ ALTER TABLE `employee_project`
 	
 ALTER TABLE `employee_project`
 	ADD CONSTRAINT `FK2employee` FOREIGN KEY (`employee_id`) REFERENCES `employee_ch4` (`user_id`) ON UPDATE CASCADE ON DELETE CASCADE;
+	
+ALTER TABLE `employee_ch4`
+	ADD COLUMN `street` VARCHAR(50) NULL DEFAULT NULL AFTER `parking_lot`,
+	ADD COLUMN `city` VARCHAR(50) NULL DEFAULT NULL AFTER `street`,
+	ADD COLUMN `zip_code` VARCHAR(50) NULL DEFAULT NULL AFTER `city`,
+	ADD COLUMN `state` VARCHAR(50) NULL DEFAULT NULL AFTER `zip_code`;
+
+ALTER TABLE `employee_ch4`
+	CHANGE COLUMN `street` `street_name` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_bin' AFTER `parking_lot`,
+	CHANGE COLUMN `city` `city_name` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_bin' AFTER `street_name`,
+	CHANGE COLUMN `zip_code` `zip_code_val` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_bin' AFTER `city_name`;

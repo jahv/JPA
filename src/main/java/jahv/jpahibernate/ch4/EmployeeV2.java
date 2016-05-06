@@ -8,8 +8,11 @@ import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -105,18 +108,27 @@ public class EmployeeV2 {
 	 * Join column is needed when the fk column names different to department_id.
 	 * The value is the actual column name in DB
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "depto_id")
 	private DepartmentEntity department;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "parking_lot")
 	private ParkingLotEntity parkingSpace;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "employee_project", joinColumns = @JoinColumn(name = "employee_id"),
 			inverseJoinColumns = @JoinColumn(name = "project_id"))
 	private List<Project> projects;
+
+	@Embedded
+	@AttributeOverrides(value = {
+			@AttributeOverride(name = "street", column = @Column(name = "street_name")),
+			@AttributeOverride(name = "city", column = @Column(name = "city_name")),
+			@AttributeOverride(name = "zipCode", column = @Column(name = "zip_code_val"))
+	})
+	private Address address;
+
 	/**
 	 * @return the doubleData
 	 */
@@ -325,6 +337,20 @@ public class EmployeeV2 {
 	 */
 	public void setProjects(final List<Project> projects) {
 		this.projects = projects;
+	}
+
+	/**
+	 * @return the address
+	 */
+	public Address getAddress() {
+		return address;
+	}
+
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(final Address address) {
+		this.address = address;
 	}
 
 	/*
