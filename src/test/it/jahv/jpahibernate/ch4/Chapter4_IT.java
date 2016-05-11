@@ -2,6 +2,7 @@ package jahv.jpahibernate.ch4;
 
 import jahv.jpahibernate.ch2.Employee;
 import jahv.jpahibernate.utils.EnumValues;
+import jahv.jpahibernate.utils.GenericRepository;
 import jahv.jpahibernate.utils.Utils;
 
 import java.util.Calendar;

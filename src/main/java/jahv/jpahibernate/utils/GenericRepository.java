@@ -1,4 +1,4 @@
-package jahv.jpahibernate.ch4;
+package jahv.jpahibernate.utils;
 
 import javax.persistence.EntityManager;
 
