@@ -41,3 +41,15 @@ ENGINE=InnoDB
 ALTER TABLE `ch5_employee`
 	ADD COLUMN `deptoId` INT NULL DEFAULT NULL AFTER `salary`,
 	ADD CONSTRAINT `FK1_ch5_depto_id` FOREIGN KEY (`deptoId`) REFERENCES `ch5_department` (`id`);
+	
+CREATE TABLE `ch5_phones` (
+	`phoneId` INT NOT NULL AUTO_INCREMENT,
+	`type` VARCHAR(50) NULL,
+	`val` VARCHAR(50) NULL,
+	`employeeId` INT NULL,
+	PRIMARY KEY (`phoneId`),
+	CONSTRAINT `FK1_employee_phone` FOREIGN KEY (`employeeId`) REFERENCES `ch5_employee` (`id`)
+)
+COLLATE='utf8_bin'
+ENGINE=InnoDB
+;

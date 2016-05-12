@@ -59,6 +59,8 @@ public class Chapter5_IT {
 		Assertions.assertThat(employeeCh5Found).isNotNull();
 		Assertions.assertThat(employeeCh5Found.getNickNames()).isNotNull().isNotEmpty();
 		Assertions.assertThat(employeeCh5Found.getVacationBooking()).isNotNull().isNotEmpty();
+		Assertions.assertThat(employeeCh5Found.getDepto()).isNotNull();
+		Assertions.assertThat(employeeCh5Found.getPhones()).isNotNull().isNotEmpty();
 	}
 
 	/**

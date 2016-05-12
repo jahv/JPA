@@ -1,6 +1,7 @@
 package jahv.jpahibernate.ch5;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.AttributeOverride;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
 
 import com.google.common.base.Objects;
@@ -40,7 +42,7 @@ public class EmployeeCh5Entity {
 
 	@ElementCollection(fetch = FetchType.LAZY)
 	@CollectionTable(name = "ch5_nicknames", joinColumns = @JoinColumn(name = "employeeId"))
-	@Column(name = "use")
+	@Column(name = "nickName")
 	private Set<String> nickNames;
 
 	// Unidirectional and bidirectional does not change
@@ -48,6 +50,12 @@ public class EmployeeCh5Entity {
 	@ManyToOne
 	@JoinColumn(name = "deptoId")
 	private DepartmentCh5Entity depto;
+
+	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(name = "ch5_phones", joinColumns = @JoinColumn(name = "employeeId"))
+	@MapKeyColumn(name = "type")
+	@Column(name = "val")
+	private Map<String, String> phones;
 
 	/**
 	 * @return the id
@@ -131,6 +139,20 @@ public class EmployeeCh5Entity {
 	 */
 	public void setDepto(final DepartmentCh5Entity depto) {
 		this.depto = depto;
+	}
+
+	/**
+	 * @return the phones
+	 */
+	public Map<String, String> getPhones() {
+		return phones;
+	}
+
+	/**
+	 * @param phones the phones to set
+	 */
+	public void setPhones(final Map<String, String> phones) {
+		this.phones = phones;
 	}
 
 	/*
