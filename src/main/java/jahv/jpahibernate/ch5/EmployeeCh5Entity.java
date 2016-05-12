@@ -9,6 +9,7 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKeyColumn;
+import javax.persistence.MapKeyEnumerated;
 import javax.persistence.Table;
 
 import com.google.common.base.Objects;
@@ -54,8 +56,9 @@ public class EmployeeCh5Entity {
 	@ElementCollection(fetch = FetchType.LAZY)
 	@CollectionTable(name = "ch5_phones", joinColumns = @JoinColumn(name = "employeeId"))
 	@MapKeyColumn(name = "type")
+	@MapKeyEnumerated(EnumType.STRING)
 	@Column(name = "val")
-	private Map<String, String> phones;
+	private Map<PhoneTypeEnum, String> phones;
 
 	/**
 	 * @return the id
@@ -144,14 +147,14 @@ public class EmployeeCh5Entity {
 	/**
 	 * @return the phones
 	 */
-	public Map<String, String> getPhones() {
+	public Map<PhoneTypeEnum, String> getPhones() {
 		return phones;
 	}
 
 	/**
 	 * @param phones the phones to set
 	 */
-	public void setPhones(final Map<String, String> phones) {
+	public void setPhones(final Map<PhoneTypeEnum, String> phones) {
 		this.phones = phones;
 	}
 

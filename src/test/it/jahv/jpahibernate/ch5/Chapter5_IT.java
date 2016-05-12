@@ -2,7 +2,14 @@ package jahv.jpahibernate.ch5;
 
 import jahv.jpahibernate.utils.GenericRepository;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,6 +24,7 @@ public class Chapter5_IT {
 
 	private static EntityManagerFactory entityManagerFactory;
 	private static EntityManager entityManager;
+
 	private static GenericRepository<EmployeeCh5Entity> employeeCh5Repository;
 	private static GenericRepository<DepartmentCh5Entity> departmentCh5Repository;
 
@@ -36,9 +44,41 @@ public class Chapter5_IT {
 	 */
 	@Test
 	public void saveFindTest() {
+		final DepartmentCh5Entity depto = new DepartmentCh5Entity();
+		depto.setName("Automation");
+		final DepartmentCh5Entity savedDepto = departmentCh5Repository.save(depto);
+
+		final VacationEntryEmbeddable period1 = new VacationEntryEmbeddable();
+		period1.setStartDate(new Date());
+		period1.setDaysTaken(7);
+
+		final VacationEntryEmbeddable period2 = new VacationEntryEmbeddable();
+		final Calendar oneYearLater = Calendar.getInstance();
+		oneYearLater.add(Calendar.YEAR, 1);
+		period2.setStartDate(oneYearLater.getTime());
+		period2.setDaysTaken(15);
+
+		final List<VacationEntryEmbeddable> vacations = new ArrayList<VacationEntryEmbeddable>();
+		vacations.add(period1);
+		vacations.add(period2);
+
+		final Set<String> nickNames = new HashSet<String>();
+		nickNames.add("Tester");
+		nickNames.add("Automation Tester");
+
+		final Map<PhoneTypeEnum, String> phones = new HashMap<PhoneTypeEnum, String>();
+		phones.put(PhoneTypeEnum.MOBILE, "045 22 23 40 58 38");
+		phones.put(PhoneTypeEnum.HOME, "55 75 74 40 85");
+		phones.put(PhoneTypeEnum.WORK, "55 26 26 82 82");
+
 		final EmployeeCh5Entity employeeCh5Entity = new EmployeeCh5Entity();
 		employeeCh5Entity.setNameEmployee("Jose Antonio " + new Date());
 		employeeCh5Entity.setSalary(Math.random() * 1000);
+
+		employeeCh5Entity.setDepto(savedDepto);
+		employeeCh5Entity.setVacationBooking(vacations);
+		employeeCh5Entity.setNickNames(nickNames);
+		employeeCh5Entity.setPhones(phones);
 
 		final EmployeeCh5Entity employeeCh5Saved = employeeCh5Repository.save(employeeCh5Entity);
 

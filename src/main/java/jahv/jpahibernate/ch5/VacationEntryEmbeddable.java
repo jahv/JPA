@@ -1,6 +1,6 @@
 package jahv.jpahibernate.ch5;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -12,21 +12,21 @@ public class VacationEntryEmbeddable {
 
 	@Column(name = "startDate", columnDefinition = "DATE")
 	@Temporal(TemporalType.DATE)
-	private Calendar startDate;
+	private Date startDate;
 
 	private Integer daysTaken;
 
 	/**
 	 * @return the startDate
 	 */
-	public Calendar getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
 	/**
 	 * @param startDate the startDate to set
 	 */
-	public void setStartDate(final Calendar startDate) {
+	public void setStartDate(final Date startDate) {
 		this.startDate = startDate;
 	}
 
