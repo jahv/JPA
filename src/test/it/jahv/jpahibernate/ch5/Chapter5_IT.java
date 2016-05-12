@@ -37,7 +37,7 @@ public class Chapter5_IT {
 	@Test
 	public void saveFindTest() {
 		final EmployeeCh5Entity employeeCh5Entity = new EmployeeCh5Entity();
-		employeeCh5Entity.setName("Jose Antonio " + new Date());
+		employeeCh5Entity.setNameEmployee("Jose Antonio " + new Date());
 		employeeCh5Entity.setSalary(Math.random() * 1000);
 
 		final EmployeeCh5Entity employeeCh5Saved = employeeCh5Repository.save(employeeCh5Entity);

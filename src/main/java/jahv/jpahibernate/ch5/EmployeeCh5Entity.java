@@ -28,7 +28,7 @@ public class EmployeeCh5Entity {
 	private Long id;
 
 	@Column(name = "NAME", columnDefinition = "VARCHAR", length = 50)
-	private String name;
+	private String nameEmployee;
 
 	@Column(name = "SALARY", columnDefinition = "DOUBLE")
 	private Double salary;
@@ -66,15 +66,15 @@ public class EmployeeCh5Entity {
 	/**
 	 * @return the name
 	 */
-	public String getName() {
-		return name;
+	public String getNameEmployee() {
+		return nameEmployee;
 	}
 
 	/**
 	 * @param name the name to set
 	 */
-	public void setName(final String name) {
-		this.name = name;
+	public void setNameEmployee(final String nameEmployee) {
+		this.nameEmployee = nameEmployee;
 	}
 
 	/**
@@ -140,7 +140,7 @@ public class EmployeeCh5Entity {
 	 */
 	@Override
 	public String toString() {
-		return "EmployeeCh5Entity [id=" + id + ", name=" + name + ", salary=" + salary + "]";
+		return "EmployeeCh5Entity [id=" + id + ", name=" + nameEmployee + ", salary=" + salary + "]";
 	}
 
 	/*
@@ -150,7 +150,7 @@ public class EmployeeCh5Entity {
 	 */
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(id, name, salary);
+		return Objects.hashCode(id, nameEmployee, salary);
 	}
 
 	/*
@@ -163,7 +163,7 @@ public class EmployeeCh5Entity {
 		if (obj instanceof EmployeeCh5Entity) {
 			final EmployeeCh5Entity that = (EmployeeCh5Entity) obj;
 			return Objects.equal(this.id, that.id)
-					&& Objects.equal(this.name, that.name)
+					&& Objects.equal(this.nameEmployee, that.nameEmployee)
 					&& Objects.equal(this.salary, that.salary);
 		}
 		return false;

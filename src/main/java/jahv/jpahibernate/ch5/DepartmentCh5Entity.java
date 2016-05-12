@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -22,15 +23,19 @@ public class DepartmentCh5Entity {
 	@Column(columnDefinition = "VARCHAR")
 	private String name;
 
-	// One to many, bidirectional relation. Needs the corresponding @ManyToOne in the other side
+	// OneToMany, bidirectional relation. Needs the corresponding @ManyToOne in the other side
 	// mappedBy: name of attribute in class EmployeeCh5Entity which corresponds this Collection
 	@OneToMany(mappedBy = "depto")
+	// OrderBy takes the columns names to order followed by ASC/DESC
+	@OrderBy("name DESC, salary ASC")
 	private List<EmployeeCh5Entity> employees;
 
-	// One to many, unidirectional relation.
-	// name: Table name for the relation, in this case: Department 1..* Employee
-	// joinColumns: column name for joining in the table of "name", in this case table Employee has the column deptoId
-	// inverseJoinColumns: column name for joining in the current table, in this case table Department has the column id
+	// -OneToMany, unidirectional relation.
+	// -JoinTable:
+	// - name: Table name for the relation, in this case: Department 1..* Employee
+	// - joinColumns: column name for joining in the table of "name", in this case table Employee has the column deptoId
+	// - inverseJoinColumns: column name for joining in the current table, in this case table Department has the column
+	// id
 	// @OneToMany
 	// @JoinTable(name = "ch5_employee", joinColumns = @JoinColumn(name = "deptoId"),
 	// inverseJoinColumns = @JoinColumn(name = "id"))
