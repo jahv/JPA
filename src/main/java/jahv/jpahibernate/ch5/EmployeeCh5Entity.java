@@ -13,13 +13,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.google.common.base.Objects;
 
 @Entity
-@Table(name = "Employee_chapter5")
-public class EmployeeCh5 {
+@Table(name = "ch5_employee")
+public class EmployeeCh5Entity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,15 +33,21 @@ public class EmployeeCh5 {
 	@Column(name = "SALARY", columnDefinition = "DOUBLE")
 	private Double salary;
 
-	@ElementCollection(targetClass = VacationEntry.class, fetch = FetchType.LAZY)
+	@ElementCollection(targetClass = VacationEntryEmbeddable.class, fetch = FetchType.LAZY)
 	@CollectionTable(name = "ch5_employee_vacations", joinColumns = @JoinColumn(name = "employeeId"))
 	@AttributeOverride(name = "daysTaken", column = @Column(name = "days"))
-	private List<VacationEntry> vacationBooking;
+	private List<VacationEntryEmbeddable> vacationBooking;
 
 	@ElementCollection(fetch = FetchType.LAZY)
 	@CollectionTable(name = "ch5_nicknames", joinColumns = @JoinColumn(name = "employeeId"))
 	@Column(name = "use")
 	private Set<String> nickNames;
+
+	// Unidirectional and bidirectional does not change
+	// @JoinColumn: name of the current column to join with Department
+	@ManyToOne
+	@JoinColumn(name = "deptoId")
+	private DepartmentCh5Entity depto;
 
 	/**
 	 * @return the id
@@ -87,14 +94,14 @@ public class EmployeeCh5 {
 	/**
 	 * @return the vacationBooking
 	 */
-	public List<VacationEntry> getVacationBooking() {
+	public List<VacationEntryEmbeddable> getVacationBooking() {
 		return vacationBooking;
 	}
 
 	/**
 	 * @param vacationBooking the vacationBooking to set
 	 */
-	public void setVacationBooking(final List<VacationEntry> vacationBooking) {
+	public void setVacationBooking(final List<VacationEntryEmbeddable> vacationBooking) {
 		this.vacationBooking = vacationBooking;
 	}
 
@@ -112,6 +119,20 @@ public class EmployeeCh5 {
 		this.nickNames = nickNames;
 	}
 
+	/**
+	 * @return the depto
+	 */
+	public DepartmentCh5Entity getDepto() {
+		return depto;
+	}
+
+	/**
+	 * @param depto the depto to set
+	 */
+	public void setDepto(final DepartmentCh5Entity depto) {
+		this.depto = depto;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -119,7 +140,7 @@ public class EmployeeCh5 {
 	 */
 	@Override
 	public String toString() {
-		return "EmployeeCh5 [id=" + id + ", name=" + name + ", salary=" + salary + "]";
+		return "EmployeeCh5Entity [id=" + id + ", name=" + name + ", salary=" + salary + "]";
 	}
 
 	/*
@@ -139,8 +160,8 @@ public class EmployeeCh5 {
 	 */
 	@Override
 	public boolean equals(final Object obj) {
-		if (obj instanceof EmployeeCh5) {
-			final EmployeeCh5 that = (EmployeeCh5) obj;
+		if (obj instanceof EmployeeCh5Entity) {
+			final EmployeeCh5Entity that = (EmployeeCh5Entity) obj;
 			return Objects.equal(this.id, that.id)
 					&& Objects.equal(this.name, that.name)
 					&& Objects.equal(this.salary, that.salary);

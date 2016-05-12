@@ -1,4 +1,4 @@
-CREATE TABLE `Employee_chapter5` (
+CREATE TABLE `ch5_employee` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(50) NULL,
 	`salary` DOUBLE NULL,
@@ -28,3 +28,16 @@ CREATE TABLE `ch5_employee_vacations` (
 COLLATE='utf8_bin'
 ENGINE=InnoDB
 ;
+
+CREATE TABLE `ch5_department` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(50) NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_bin'
+ENGINE=InnoDB
+;
+
+ALTER TABLE `ch5_employee`
+	ADD COLUMN `deptoId` INT NULL DEFAULT NULL AFTER `salary`,
+	ADD CONSTRAINT `FK1_ch5_depto_id` FOREIGN KEY (`deptoId`) REFERENCES `ch5_department` (`id`);

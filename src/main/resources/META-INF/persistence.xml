@@ -13,7 +13,8 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>jahv.jpahibernate.ch4.ParkingLotEntity</class>
 		<class>jahv.jpahibernate.ch4.Project</class>
 		
-		<class>jahv.jpahibernate.ch5.EmployeeCh5</class>
+		<class>jahv.jpahibernate.ch5.EmployeeCh5Entity</class>
+		<class>jahv.jpahibernate.ch5.DepartmentCh5Entity</class>
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>

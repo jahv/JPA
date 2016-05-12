@@ -8,7 +8,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Embeddable
-public class VacationEntry {
+public class VacationEntryEmbeddable {
 
 	@Column(name = "startDate", columnDefinition = "DATE")
 	@Temporal(TemporalType.DATE)
@@ -51,7 +51,7 @@ public class VacationEntry {
 	 */
 	@Override
 	public String toString() {
-		return "VacationEntry [startDate=" + startDate + ", daysTaken=" + daysTaken + "]";
+		return "VacationEntryEmbeddable [startDate=" + startDate + ", daysTaken=" + daysTaken + "]";
 	}
 
 }
