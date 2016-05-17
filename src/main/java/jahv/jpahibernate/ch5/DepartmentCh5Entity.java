@@ -1,12 +1,14 @@
 package jahv.jpahibernate.ch5;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
@@ -23,12 +25,18 @@ public class DepartmentCh5Entity {
 	@Column(columnDefinition = "VARCHAR")
 	private String name;
 
-	// OneToMany, bidirectional relation. Needs the corresponding @ManyToOne in the other side
+	// @OneToMany, bidirectional relation. Needs the corresponding @ManyToOne in the other side
 	// mappedBy: name of attribute in class EmployeeCh5Entity which corresponds this Collection
 	@OneToMany(mappedBy = "depto")
-	// OrderBy takes the columns names to order followed by ASC/DESC
+	// @OrderBy takes the columns names to order followed by ASC/DESC
 	@OrderBy("name DESC, salary ASC")
 	private List<EmployeeCh5Entity> employees;
+
+	@OneToMany(mappedBy = "depto")
+	// @MapKey
+	// name: name of property in EmployeeCh5Entity which represents the key for the map
+	@MapKey(name = "nameEmployee")
+	private Map<String, EmployeeCh5Entity> employeesMap;
 
 	// -OneToMany, unidirectional relation.
 	// -JoinTable:
