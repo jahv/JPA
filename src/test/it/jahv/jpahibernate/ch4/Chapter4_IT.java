@@ -177,7 +177,7 @@ public class Chapter4_IT {
 	@Test
 	public void testFindDepartment() {
 
-		final DepartmentEntity department = deparmentRepo.find(DepartmentEntity.class, 1L);
+		final DepartmentEntity department = deparmentRepo.find(DepartmentEntity.class, 5L);
 
 		Assertions.assertThat(department).isNotNull();
 		Assertions.assertThat(department.getEmployees()).isNotNull().isNotEmpty();

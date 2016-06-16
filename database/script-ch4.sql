@@ -1,37 +1,37 @@
-CREATE TABLE `Employee_Ch5` (
-	`user_id` INT NULL,
-	`user_name` VARCHAR(50) NULL
+CREATE TABLE `employee_ch4` (
+  `user_id` INT NULL,
+  `user_name` VARCHAR(50) NULL
 )
-COLLATE='utf8_bin'
-ENGINE=InnoDB
+  COLLATE='utf8_bin'
+  ENGINE=InnoDB
 ;
 
-ALTER TABLE `employee_ch5`
-	ADD COLUMN `double_data` DOUBLE NULL DEFAULT NULL AFTER `user_name`,
-	ADD COLUMN `boolean_data` BIT NULL DEFAULT NULL AFTER `double_data`,
-	ADD COLUMN `array_data` LONGBLOB NULL DEFAULT NULL AFTER `boolean_data`,
-	ADD COLUMN `date_time_data` DATETIME NULL DEFAULT NULL AFTER `array_data`,
-	ADD COLUMN `date_data` DATE NULL DEFAULT NULL AFTER `date_time_data`,
-	ADD COLUMN `time_data` TIME NULL DEFAULT NULL AFTER `date_data`
-	ADD COLUMN `enum_data` VARCHAR(50) NULL DEFAULT NULL AFTER `time_data`,
-	ADD COLUMN `enum_data_2` VARCHAR(50) NULL DEFAULT NULL AFTER `enum_data`,
-	ADD COLUMN `serializable_data` BLOB NULL DEFAULT NULL AFTER `enum_data_2`;
-	
-ALTER TABLE `employee_ch5`
-	CHANGE COLUMN `user_id` `user_id` INT(11) NOT NULL AUTO_INCREMENT FIRST,
-	ADD PRIMARY KEY (`user_id`);
-	
+ALTER TABLE `employee_ch4`
+  ADD COLUMN `double_data` DOUBLE NULL DEFAULT NULL AFTER `user_name`,
+  ADD COLUMN `boolean_data` BIT NULL DEFAULT NULL AFTER `double_data`,
+  ADD COLUMN `array_data` LONGBLOB NULL DEFAULT NULL AFTER `boolean_data`,
+  ADD COLUMN `date_time_data` DATETIME NULL DEFAULT NULL AFTER `array_data`,
+  ADD COLUMN `date_data` DATE NULL DEFAULT NULL AFTER `date_time_data`,
+  ADD COLUMN `time_data` TIME NULL DEFAULT NULL AFTER `date_data`,
+ADD COLUMN `enum_data` VARCHAR(50) NULL DEFAULT NULL AFTER `time_data`,
+ADD COLUMN `enum_data_2` VARCHAR(50) NULL DEFAULT NULL AFTER `enum_data`,
+ADD COLUMN `serializable_data` BLOB NULL DEFAULT NULL AFTER `enum_data_2`;
+
+ALTER TABLE `employee_ch4`
+  CHANGE COLUMN `user_id` `user_id` INT(11) NOT NULL AUTO_INCREMENT FIRST,
+  ADD PRIMARY KEY (`user_id`);
+
 --#############################
 --# Table for generated id
 --#############################
 CREATE TABLE `EmployeeV2_id_generator` (
-	`generator_name` VARCHAR(50) NOT NULL,
-	`value` INT NOT NULL,
-	PRIMARY KEY (`generator_name`)
+  `generator_name` VARCHAR(50) NOT NULL,
+  `value` INT NOT NULL,
+  PRIMARY KEY (`generator_name`)
 )
-COLLATE='utf8_bin'
-ENGINE=InnoDB
-;	
+  COLLATE='utf8_bin'
+  ENGINE=InnoDB
+;
 
 INSERT INTO `jpahibernate`.`employeev2_id_generator` (`generator_name`, `value`) VALUES ('EmployeeV2', 1);
 
@@ -39,66 +39,69 @@ INSERT INTO `jpahibernate`.`employeev2_id_generator` (`generator_name`, `value`)
 --# Relations
 --#############################
 CREATE TABLE `department` (
-	`id` INT NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(50) NOT NULL,
-	PRIMARY KEY (`id`)
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`id`)
 )
-COLLATE='utf8_bin'
-ENGINE=InnoDB
+  COLLATE='utf8_bin'
+  ENGINE=InnoDB
 ;
 
 INSERT INTO `jpahibernate`.`department` (`name`) VALUES ('RH');
 INSERT INTO `jpahibernate`.`department` (`name`) VALUES ('Development');
 
 ALTER TABLE `employee_ch4`
-	ADD COLUMN `depto_id` INT NULL AFTER `serializable_data`,
-	ADD CONSTRAINT `FK1_department` FOREIGN KEY (`depto_id`) REFERENCES `department` (`id`) ON UPDATE CASCADE ON DELETE CASCADE;
-	
+  ADD COLUMN `depto_id` INT NULL AFTER `serializable_data`,
+  ADD CONSTRAINT `FK1_department` FOREIGN KEY (`depto_id`) REFERENCES `department` (`id`) ON UPDATE CASCADE ON DELETE CASCADE;
+
 
 CREATE TABLE `Parking_space` (
-	`id` INT NOT NULL AUTO_INCREMENT,
-	`lot` INT NOT NULL,
-	`location` VARCHAR(50) NOT NULL,
-	PRIMARY KEY (`id`)
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `lot` INT NOT NULL,
+  `location` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`id`)
 )
-COLLATE='utf8_bin'
-ENGINE=InnoDB
+  COLLATE='utf8_bin'
+  ENGINE=InnoDB
 ;
-	
+
 ALTER TABLE `employee_ch4`
-	ADD COLUMN `parking_lot` INT(11) NULL DEFAULT NULL AFTER `depto_id`;
-	
+  ADD COLUMN `parking_lot` INT(11) NULL DEFAULT NULL AFTER `depto_id`;
+
 CREATE TABLE `project` (
-	`id` INT NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(50) NULL,
-	PRIMARY KEY (`id`)
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50) NULL,
+  PRIMARY KEY (`id`)
 )
-COLLATE='utf8_bin'
-ENGINE=InnoDB
+  COLLATE='utf8_bin'
+  ENGINE=InnoDB
 ;
 
 CREATE TABLE `employee_project` (
-	`employee_id` INT NOT NULL,
-	`project_id` INT NOT NULL,
-	PRIMARY KEY (`employee_id`, `project_id`)
+  `employee_id` INT NOT NULL,
+  `project_id` INT NOT NULL,
+  PRIMARY KEY (`employee_id`, `project_id`)
 )
-COLLATE='utf8_bin'
-ENGINE=InnoDB
+  COLLATE='utf8_bin'
+  ENGINE=InnoDB
 ;
 
 ALTER TABLE `employee_project`
-	ADD CONSTRAINT `FK1project` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON UPDATE CASCADE ON DELETE CASCADE;
-	
+  ADD CONSTRAINT `FK1project` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON UPDATE CASCADE ON DELETE CASCADE;
+
 ALTER TABLE `employee_project`
-	ADD CONSTRAINT `FK2employee` FOREIGN KEY (`employee_id`) REFERENCES `employee_ch4` (`user_id`) ON UPDATE CASCADE ON DELETE CASCADE;
-	
-ALTER TABLE `employee_ch4`
-	ADD COLUMN `street` VARCHAR(50) NULL DEFAULT NULL AFTER `parking_lot`,
-	ADD COLUMN `city` VARCHAR(50) NULL DEFAULT NULL AFTER `street`,
-	ADD COLUMN `zip_code` VARCHAR(50) NULL DEFAULT NULL AFTER `city`,
-	ADD COLUMN `state` VARCHAR(50) NULL DEFAULT NULL AFTER `zip_code`;
+  ADD CONSTRAINT `FK2employee` FOREIGN KEY (`employee_id`) REFERENCES `employee_ch4` (`user_id`) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE `employee_ch4`
-	CHANGE COLUMN `street` `street_name` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_bin' AFTER `parking_lot`,
-	CHANGE COLUMN `city` `city_name` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_bin' AFTER `street_name`,
-	CHANGE COLUMN `zip_code` `zip_code_val` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_bin' AFTER `city_name`;
+  ADD COLUMN `street` VARCHAR(50) NULL DEFAULT NULL AFTER `parking_lot`,
+  ADD COLUMN `city` VARCHAR(50) NULL DEFAULT NULL AFTER `street`,
+  ADD COLUMN `zip_code` VARCHAR(50) NULL DEFAULT NULL AFTER `city`,
+  ADD COLUMN `state` VARCHAR(50) NULL DEFAULT NULL AFTER `zip_code`;
+
+ALTER TABLE `employee_ch4`
+  CHANGE COLUMN `street` `street_name` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_bin' AFTER `parking_lot`,
+  CHANGE COLUMN `city` `city_name` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_bin' AFTER `street_name`,
+  CHANGE COLUMN `zip_code` `zip_code_val` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_bin' AFTER `city_name`;
+
+ALTER TABLE `employee_ch4`
+  ADD COLUMN `array_data_2` LONGBLOB NULL DEFAULT NULL;
