@@ -82,7 +82,7 @@ public class EmployeeCh5Entity {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param nameEmployee the name to set
 	 */
 	public void setNameEmployee(final String nameEmployee) {
 		this.nameEmployee = nameEmployee;
